@@ -10,16 +10,20 @@ import {
   Users, 
   Settings, 
   BarChart3,
-  LogOut
+  LogOut,
+  Monitor,
+  ShieldCheck,
+  Camera
 } from 'lucide-react'
 import styles from './Sidebar.module.css'
 
 const navItems = [
   { name: 'Dashboard', icon: LayoutDashboard, href: '/admin' },
+  { name: 'CMS', icon: Monitor, href: '/admin/cms' },
   { name: 'Products', icon: Package, href: '/admin/products' },
+  { name: 'Administration', icon: ShieldCheck, href: '/admin/administration' },
+  { name: 'Lookbook', icon: Camera, href: '/admin/lookbook' },
   { name: 'Orders', icon: ShoppingBag, href: '/admin/orders' },
-  { name: 'Customers', icon: Users, href: '/admin/customers' },
-  { name: 'Analytics', icon: BarChart3, href: '/admin/analytics' },
   { name: 'Settings', icon: Settings, href: '/admin/settings' },
 ]
 

@@ -5,17 +5,19 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 3rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
 }
 
 .header h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1a1a1a;
   margin-bottom: 0.5rem;
 }
 
 .header p {
-  color: hsl(var(--muted-foreground));
+  color: #666;
 }
 
 .controls {
@@ -25,9 +27,8 @@
 }
 
 .searchWrapper {
-  position: relative;
   flex: 1;
-  max-width: 400px;
+  position: relative;
 }
 
 .searchIcon {
@@ -35,22 +36,28 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: hsl(var(--muted-foreground));
+  color: #999;
 }
 
 .searchWrapper input {
   width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
-  background: hsl(var(--secondary));
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  outline: none;
+  padding: 0.8rem 1rem 0.8rem 3rem;
+  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
 }
 
+.searchWrapper input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* Table */
 .tableWrapper {
-  background: hsl(var(--background));
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
+  background: white;
+  border-radius: 0.8rem;
+  border: 1px solid #eee;
   overflow: hidden;
 }
 
@@ -61,17 +68,20 @@
 }
 
 .table th {
-  padding: 1rem 1.5rem;
-  background: hsl(var(--secondary));
-  font-size: 0.75rem;
-  font-weight: 700;
+  padding: 1.2rem 1.5rem;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
   text-transform: uppercase;
-  color: hsl(var(--muted-foreground));
+  letter-spacing: 0.05em;
 }
 
 .table td {
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid hsl(var(--border));
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
 }
 
 .productCell {
@@ -81,40 +91,39 @@
 }
 
 .productCell img {
-  width: 48px;
-  height: 48px;
-  border-radius: 4px;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.4rem;
   object-fit: cover;
-  background: hsl(var(--secondary));
-}
-
-.productInfo {
-  display: flex;
-  flex-direction: column;
 }
 
 .productName {
-  font-weight: 600;
-  font-size: 0.875rem;
+  display: block;
+  font-weight: 500;
+  color: #1a1a1a;
 }
 
 .productSlug {
-  font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
+  display: block;
+  font-size: 0.8rem;
+  color: #999;
 }
 
 .statusBadge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 2rem;
   font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  background: hsla(215.4, 16.3%, 46.9%, 0.1);
-  color: hsl(215.4, 16.3%, 46.9%);
+  font-weight: 500;
 }
 
-.badgeNew {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
+.badgeActive {
+  background: #e6fffa;
+  color: #047481;
+}
+
+.badgeDraft {
+  background: #f7fafc;
+  color: #4a5568;
 }
 
 .actions {
@@ -123,24 +132,152 @@
 }
 
 .actionBtn {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  border: 1px solid hsl(var(--border));
-  background: transparent;
+  padding: 0.5rem;
+  border: 1px solid #eee;
+  border-radius: 0.4rem;
+  background: white;
+  color: #666;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .actionBtn:hover {
-  background: hsl(var(--secondary));
+  background: #fafafa;
+  color: #000;
 }
 
 .deleteBtn:hover {
-  background: #fee2e2;
-  color: #ef4444;
-  border-color: #fecaca;
+  background: #fff1f0;
+  color: #f5222d;
+  border-color: #ffccc7;
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  background: white;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.modalHeader button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Form Layout */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  overflow-y: auto;
+  padding: 2rem;
+  gap: 2.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.formGroup input, 
+.formGroup textarea, 
+.formGroup select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.fileUpload {
+  margin-top: 1rem;
+}
+
+.uploadBox {
+  border: 2px dashed #eee;
+  border-radius: 0.8rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #999;
+}
+
+.uploadBox:hover {
+  border-color: #000;
+  background: #fafafa;
+  color: #000;
+}
+
+.variantList {
+  background: #fafafa;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.variantRow {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 0.5rem;
+}
+
+.addBtn {
+  background: none;
+  border: 1px dashed #ddd;
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  cursor: pointer;
 }
