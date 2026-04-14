@@ -150,12 +150,24 @@ export default function CMSPage() {
                 <div className={styles.cardContent} style={{ display: 'grid', gridTemplateColumns: isImageKey ? '1fr 300px' : '1fr', gap: '2rem' }}>
                   <div className={styles.cmsInputGroup}>
                     <label style={{ fontSize: '0.8rem', color: '#888', marginBottom: '0.5rem', display: 'block' }}>Text Content</label>
-                    <textarea
-                      value={item.content || ''}
-                      placeholder="Enter content..."
-                      onChange={(e) => handleUpdate(item.id, { content: e.target.value })}
-                      style={{ width: '100%', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #eee', minHeight: '100px', fontSize: '0.95rem' }}
-                    />
+                    {item.key === 'featured_products_count' ? (
+                      <select
+                        value={item.content || '4'}
+                        onChange={(e) => handleUpdate(item.id, { content: e.target.value })}
+                        style={{ width: '100%', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #eee', fontSize: '0.95rem', background: 'white' }}
+                      >
+                        {[2, 4, 6, 8, 10, 12].map(num => (
+                          <option key={num} value={num}>{num} Products</option>
+                        ))}
+                      </select>
+                    ) : (
+                      <textarea
+                        value={item.content || ''}
+                        placeholder="Enter content..."
+                        onChange={(e) => handleUpdate(item.id, { content: e.target.value })}
+                        style={{ width: '100%', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #eee', minHeight: '100px', fontSize: '0.95rem' }}
+                      />
+                    )}
                   </div>
 
                   {isImageKey && (
