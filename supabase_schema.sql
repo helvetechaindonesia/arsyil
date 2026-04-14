@@ -165,6 +165,7 @@ BEGIN
     DROP POLICY IF EXISTS "Variants/Images public read, admin all" ON variants;
     DROP POLICY IF EXISTS "Variants/Images public read" ON variants;
     DROP POLICY IF EXISTS "Variants admin all" ON variants;
+    DROP POLICY IF EXISTS "Variants public read" ON variants;
 
     DROP POLICY IF EXISTS "ProductImages public read, admin all" ON product_images;
     DROP POLICY IF EXISTS "ProductImages public read" ON product_images;
@@ -274,6 +275,24 @@ CREATE TRIGGER on_auth_user_created
 -- 14. Initial Seed Data (CMS)
 INSERT INTO site_content (section, key, content, image_url) VALUES
 ('hero', 'hero_title', 'The New Era of Modest Modernity', NULL),
-('hero', 'hero_subtitle', 'Experience the perfect blend of tradition and contemporary elegance with our latest ARSYIL collections.', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop'),
-('about', 'brand_vision', 'Designing timeless pieces for the modern woman who values quality and heritage.', NULL)
+('hero', 'hero_subtitle', 'Experience the perfect blend of tradition and contemporary elegance with our latest ARSYIL collections.', NULL),
+('hero', 'hero_background_image', NULL, 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop'),
+
+('featured', 'featured_section_title', 'Seasonal Picks', NULL),
+('featured', 'featured_section_subtitle', 'Hand-selected essentials for your minimalist wardrobe.', NULL),
+
+('shipping', 'shipping_banner_title', 'Melayani Pengiriman ke Seluruh Indonesia', NULL),
+('shipping', 'shipping_banner_desc', 'Dari Sabang sampai Merauke, ARSYIL siap mengantarkan produk pilihan Anda dengan aman dan cepat sampai ke depan rumah.', NULL),
+
+('info', 'payment_info_title', 'Metode Pembayaran', NULL),
+('info', 'payment_info_desc', 'Tersedia berbagai pilihan pembayaran aman untuk kenyamanan Anda.', NULL),
+('info', 'shipping_info_title', 'Metode Pengiriman', NULL),
+('info', 'shipping_info_desc', 'Bekerja sama dengan kurir terpercaya untuk pengiriman tepat waktu.', NULL),
+
+('ethos', 'ethos_1_title', 'Timeless Design', NULL),
+('ethos', 'ethos_1_text', 'We believe in creating products that transcend trends, focusing on pure aesthetics and enduring quality.', NULL),
+('ethos', 'ethos_2_title', 'Sustainably Crafted', NULL),
+('ethos', 'ethos_2_text', 'Our commitment to the planet means using recycled materials and ethical production processes for every piece.', NULL),
+('ethos', 'ethos_3_title', 'Premium Quality', NULL),
+('ethos', 'ethos_3_text', 'Only the finest fabrics and materials are selected, ensuring that your ARSYIL pieces last a lifetime.', NULL)
 ON CONFLICT (key) DO NOTHING;

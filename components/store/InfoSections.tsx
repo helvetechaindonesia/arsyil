@@ -1,11 +1,46 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { CreditCard, Truck, ShieldCheck, Globe } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 import styles from './InfoSections.module.css'
 import { motion } from 'framer-motion'
 
 export function InfoSections() {
+  const [cms, setCms] = useState<any>({
+    payment_title: 'Metode Pembayaran',
+    payment_desc: 'Tersedia berbagai pilihan pembayaran aman untuk kenyamanan Anda.',
+    shipping_title: 'Metode Pengiriman',
+    shipping_desc: 'Bekerja sama dengan kurir terpercaya untuk pengiriman tepat waktu.',
+    banner_title: 'Melayani Pengiriman ke Seluruh Indonesia',
+    banner_desc: 'Dari Sabang sampai Merauke, ARSYIL siap mengantarkan produk pilihan Anda dengan aman dan cepat sampai ke depan rumah.'
+  })
+
+  const supabase = createClient()
+
+  useEffect(() => {
+    async function fetchCMS() {
+      const { data } = await supabase
+        .from('site_content')
+        .select('key, content')
+        .or('section.eq.info,section.eq.shipping')
+      
+      if (data) {
+        const mapped: any = {}
+        data.forEach(item => {
+          if (item.key === 'payment_info_title') mapped.payment_title = item.content
+          if (item.key === 'payment_info_desc') mapped.payment_desc = item.content
+          if (item.key === 'shipping_info_title') mapped.shipping_title = item.content
+          if (item.key === 'shipping_info_desc') mapped.shipping_desc = item.content
+          if (item.key === 'shipping_banner_title') mapped.banner_title = item.content
+          if (item.key === 'shipping_banner_desc') mapped.banner_desc = item.content
+        })
+        setCms((prev: any) => ({ ...prev, ...mapped }))
+      }
+    }
+    fetchCMS()
+  }, [])
+
   const payments = [
     { name: 'BCA', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg' },
     { name: 'Mandiri', logo: 'https://upload.wikimedia.org/wikipedia/id/f/fa/Bank_Mandiri_logo.svg' },
@@ -32,17 +67,16 @@ export function InfoSections() {
           >
             <div className={styles.cardHeader}>
               <CreditCard size={24} className={styles.icon} />
-              <h3>Metode Pembayaran</h3>
+              <h3>{cms.payment_title}</h3>
             </div>
             <div className={styles.logoGrid}>
               {payments.map(p => (
                 <div key={p.name} className={styles.logoItem} title={p.name}>
-                   {/* Simplified logos as placeholders or text if SVG is complex */}
                    <span>{p.name}</span>
                 </div>
               ))}
             </div>
-            <p className={styles.cardFooter}>Tersedia berbagai pilihan pembayaran aman untuk kenyamanan Anda.</p>
+            <p className={styles.cardFooter}>{cms.payment_desc}</p>
           </motion.div>
 
           {/* Shipping Methods */}
@@ -54,7 +88,7 @@ export function InfoSections() {
           >
             <div className={styles.cardHeader}>
               <Truck size={24} className={styles.icon} />
-              <h3>Metode Pengiriman</h3>
+              <h3>{cms.shipping_title}</h3>
             </div>
             <div className={styles.logoGrid}>
               {shipping.map(s => (
@@ -63,7 +97,7 @@ export function InfoSections() {
                 </div>
               ))}
             </div>
-            <p className={styles.cardFooter}>Bekerja sama dengan kurir terpercaya untuk pengiriman tepat waktu.</p>
+            <p className={styles.cardFooter}>{cms.shipping_desc}</p>
           </motion.div>
         </div>
 
@@ -77,8 +111,8 @@ export function InfoSections() {
           <div className={styles.indonesiaContent}>
             <div className={styles.indonesiaText}>
               <div className={styles.badge}><Globe size={14} /> Pengiriman Nasional</div>
-              <h2>Melayani Pengiriman ke Seluruh Indonesia</h2>
-              <p>Dari Sabang sampai Merauke, ARSYIL siap mengantarkan produk pilihan Anda dengan aman dan cepat sampai ke depan rumah.</p>
+              <h2>{cms.banner_title}</h2>
+              <p>{cms.banner_desc}</p>
             </div>
             <div className={styles.indonesiaIllustration}>
                <ShieldCheck size={120} strokeWidth={0.5} opacity={0.2} />
