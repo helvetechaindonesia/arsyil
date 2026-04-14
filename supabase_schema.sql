@@ -280,6 +280,7 @@ INSERT INTO site_content (section, key, content, image_url) VALUES
 
 ('featured', 'featured_section_title', 'Seasonal Picks', NULL),
 ('featured', 'featured_section_subtitle', 'Hand-selected essentials for your minimalist wardrobe.', NULL),
+('featured', 'featured_products_count', '4', NULL),
 
 ('shipping', 'shipping_banner_title', 'Melayani Pengiriman ke Seluruh Indonesia', NULL),
 ('shipping', 'shipping_banner_desc', 'Dari Sabang sampai Merauke, ARSYIL siap mengantarkan produk pilihan Anda dengan aman dan cepat sampai ke depan rumah.', NULL),

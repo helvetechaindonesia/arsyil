@@ -33,24 +33,28 @@ export function FeaturedProducts() {
         cmsData.forEach(item => {
           if (item.key === 'featured_section_title') mapped.title = item.content
           if (item.key === 'featured_section_subtitle') mapped.subtitle = item.content
+          if (item.key === 'featured_products_count') mapped.count = parseInt(item.content || '4')
         })
         setCms(prev => ({ ...prev, ...mapped }))
-      }
-
-      // 2. Fetch Featured Products (Real data from Supabase)
-      const { data: prodData } = await supabase
-        .from('products')
-        .select('*, product_images(url, is_primary)')
-        .eq('is_published', true)
-        .eq('is_featured', true)
-        .limit(4)
-      
-      if (prodData) {
-        setProducts(prodData.map(p => ({
-          ...p,
-          price: p.base_price,
-          image: p.product_images?.find((img: any) => img.is_primary)?.url || p.product_images?.[0]?.url
-        })))
+        
+        // Use the newly fetched count for the products query
+        const fetchCount = mapped.count || 4
+        
+        // 2. Fetch Featured Products (Real data from Supabase)
+        const { data: prodData } = await supabase
+          .from('products')
+          .select('*, product_images(url, is_primary)')
+          .eq('is_published', true)
+          .eq('is_featured', true)
+          .limit(fetchCount)
+        
+        if (prodData) {
+          setProducts(prodData.map(p => ({
+            ...p,
+            price: p.base_price,
+            image: p.product_images?.find((img: any) => img.is_primary)?.url || p.product_images?.[0]?.url
+          })))
+        }
       }
       setLoading(false)
     }
