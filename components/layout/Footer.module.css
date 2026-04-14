@@ -1,0 +1,190 @@
+.footer {
+  background-color: hsl(var(--secondary));
+  padding: 5rem 0 2rem;
+  border-top: 1px solid hsl(var(--border));
+  margin-top: auto;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.desktopOnly {
+  display: contents; /* Allows grid items to be direct children of the grid */
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none;
+  }
+  .mobileOnly {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 2fr 1fr 1fr 2fr;
+  }
+}
+
+.brandSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: hsl(var(--foreground));
+}
+
+.logoAccent {
+  color: hsl(var(--brand));
+}
+
+.brandDesc {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  max-width: 300px;
+}
+
+.socials {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.socials a {
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s;
+}
+
+.socials a:hover {
+  color: hsl(var(--foreground));
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list a {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s;
+}
+
+.list a:hover {
+  color: hsl(var(--foreground));
+}
+
+.newsletterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.newsletterDesc {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input {
+  flex: 1;
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.submitBtn {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  padding: 0 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+}
+
+.bottom {
+  border-top: 1px solid hsl(var(--border));
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+@media (min-width: 768px) {
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.legalLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Footer Accordion */
+.accordionItem {
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.accordionTrigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+  font-weight: 700;
+  font-size: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: hsl(var(--foreground));
+}
+
+.accordionContent {
+  padding-bottom: 1.5rem;
+}

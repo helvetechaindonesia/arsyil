@@ -1,0 +1,45 @@
+.catalogPage {
+  padding-top: 5rem;
+  padding-bottom: 8rem;
+}
+
+.header {
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-transform: capitalize;
+}
+
+.count {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none; /* In a real app, we'd add a mobile filter drawer here */
+  }
+}

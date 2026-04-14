@@ -1,0 +1,489 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid hsl(var(--border));
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.navContainer {
+  display: flex;
+  height: 4.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: hsl(var(--foreground));
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoAccent {
+  color: hsl(var(--brand));
+}
+
+.desktopNav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+}
+
+.navItem {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s;
+}
+
+.navItem:hover {
+  color: hsl(var(--foreground));
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.notifBadge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  background-color: #ef4444;
+  border-radius: 100px;
+  border: 2px solid hsl(var(--background));
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.rightContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 1024px) {
+  .rightContent {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .rightContent {
+    gap: 2rem;
+  }
+}
+
+.mobileToggle {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .mobileToggle {
+    display: none;
+  }
+}
+
+/* Custom Mega Menu Styles */
+.kategoriTrigger {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.5rem 0;
+}
+
+.kategoriTrigger:hover {
+  color: hsl(var(--foreground));
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.megaMenuWrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: hsla(var(--background) / 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid hsl(var(--border));
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  overflow: hidden;
+  pointer-events: none; /* Let clicks pass through to the Hero if not on the menu content */
+}
+
+.megaMenuInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  pointer-events: auto; /* Only capture clicks inside the actual menu area */
+}
+
+.megaMenuHeaders {
+  display: flex;
+  gap: 4rem;
+}
+
+.megaMenuInfo {
+  flex: 0 0 240px;
+}
+
+.megaMenuTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.megaMenuDesc {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
+.megaMenuGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.megaMenuCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.megaMenuColHeader {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: hsl(var(--brand));
+  letter-spacing: 0.1em;
+}
+
+.megaMenuLinkList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.megaMenuLink {
+  font-size: 0.9375rem;
+  color: hsl(var(--muted-foreground));
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.megaMenuLink:hover {
+  color: hsl(var(--foreground));
+  padding-left: 0.25rem;
+}
+
+.megaMenuHeader {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: hsl(var(--brand));
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.megaMenuLink {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s;
+}
+
+.megaMenuLink:hover {
+  color: hsl(var(--foreground));
+}
+
+.megaMenuFeatured {
+  width: 250px;
+  position: relative;
+}
+
+.megaMenuFeatured img {
+  width: 100%;
+  height: 150px;
+  object-fit: crop;
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+}
+
+.featuredTag {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: hsl(var(--brand));
+  margin-bottom: 0.25rem;
+}
+
+.featuredTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Actions */
+.actionBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: hsl(var(--foreground));
+  display: flex;
+  align-items: center;
+}
+
+.cartBtn {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cartCount {
+  font-size: 0.75rem;
+}
+
+.authLinks {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .authLinks {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+/* Auth Styles */
+.authLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loginBtn {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.loginBtn:hover {
+  background: hsl(var(--secondary));
+  border-color: hsl(var(--foreground));
+}
+
+.profileBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  background: hsl(var(--brand));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* Mobile Overlay & Menu */
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 85%;
+  max-width: 350px;
+  background: hsl(var(--background));
+  z-index: 101;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.mobileSearch {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.mobileSearch input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--secondary));
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.mobileSearchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+}
+
+.accordionItem {
+  border-bottom: 1px solid hsl(var(--border));
+  overflow: hidden;
+}
+
+.accordionTrigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: hsl(var(--foreground));
+}
+
+.accordionContent {
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobileSubLink {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  padding-left: 0.5rem;
+}
+
+.mobileSocials {
+  margin-top: auto;
+  padding-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.mobileSocials a {
+  color: hsl(var(--muted-foreground));
+}
+
+.mobileMenuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.mobileMenuHeader button {
+  background: transparent;
+  border: none;
+}
+
+.mobileGroup {
+  margin-bottom: 2rem;
+}
+
+.mobileGroupLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.mobileLink {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+}
+
+.mobileAuthActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.mobileLoginBtn {
+  width: 100%;
+  padding: 1rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
