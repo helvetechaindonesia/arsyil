@@ -194,3 +194,10 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 CREATE OR REPLACE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
+
+-- 14. Initial Seed Data (CMS)
+INSERT INTO site_content (section, key, content, image_url) VALUES
+('hero', 'hero_title', 'The New Era of Modest Modernity', NULL),
+('hero', 'hero_subtitle', 'Experience the perfect blend of tradition and contemporary elegance with our latest ARSYIL collections.', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop'),
+('about', 'brand_vision', 'Designing timeless pieces for the modern woman who values quality and heritage.', NULL)
+ON CONFLICT (key) DO NOTHING;

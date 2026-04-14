@@ -1,18 +1,49 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '../ui/Button'
+import { createClient } from '@/lib/supabase/client'
 import styles from './Hero.module.css'
 
 export function Hero() {
+  const [content, setContent] = useState<any>({
+    hero_title: 'The Art of Minimalist Luxury.',
+    hero_subtitle: 'Discover a curated collection of premium essentials designed for longevity, clarity, and exceptional quality.',
+    hero_image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=2000'
+  })
+
+  const supabase = createClient()
+
+  useEffect(() => {
+    async function fetchCMS() {
+      const { data } = await supabase
+        .from('site_content')
+        .select('key, content, image_url')
+        .eq('section', 'hero')
+
+      if (data) {
+        const cmsData: any = {}
+        data.forEach((item: any) => {
+          cmsData[item.key] = item.content || item.image_url
+        })
+        
+        setContent((prev: any) => ({
+          ...prev,
+          ...cmsData
+        }))
+      }
+    }
+    fetchCMS()
+  }, [])
+
   return (
     <section className={styles.hero}>
       <div className={styles.background}>
         <div className={styles.overlay} />
         <img 
-          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=2000" 
+          src={content.hero_subtitle_image || content.hero_image} // Fallback to seeded image if available
           alt="Luxury Collection" 
           className={styles.bgImage}
         />
@@ -26,12 +57,10 @@ export function Hero() {
           className={styles.content}
         >
           <span className={styles.badge}>Spring / Summer 2026</span>
-          <h1 className={styles.title}>
-            The Art of <br />
-            <span className={styles.accent}>Minimalist</span> Luxury.
-          </h1>
+          <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: content.hero_title.replace(/\. /g, '.<br/>') }} />
+          
           <p className={styles.description}>
-            Discover a curated collection of premium essentials designed for longevity, clarity, and exceptional quality.
+            {content.hero_subtitle || content.hero_subtitle}
           </p>
           <div className={styles.actions}>
             <Button asChild size="lg">
